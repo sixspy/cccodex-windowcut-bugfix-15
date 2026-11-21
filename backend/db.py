@@ -85,6 +85,24 @@ CREATE TABLE IF NOT EXISTS materializations(
   partition_key TEXT,
   created_at TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS failure_tickets(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  window_id INTEGER NOT NULL,
+  status TEXT NOT NULL,
+  row_count INTEGER NOT NULL,
+  total_amount REAL NOT NULL,
+  partition_key TEXT,
+  reason TEXT NOT NULL,
+  related_mat_id INTEGER,
+  created_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS clearing_deviation(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  actor TEXT NOT NULL,
+  action TEXT NOT NULL,
+  detail TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
 CREATE TABLE IF NOT EXISTS hold_staging(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   window_id INTEGER,

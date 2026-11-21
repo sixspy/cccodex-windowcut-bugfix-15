@@ -35,6 +35,8 @@ def try_acquire(conn, lock_key: str, holder: str) -> bool:
            VALUES (?,?,?,?,?)""",
         (lock_key, holder, "争用", f"持有者={row['holder']}", now),
     )
+    # 争用是既成事实，独立落库：不随随后被拒业务事务的回滚而丢失
+    conn.commit()
     return False
 
 

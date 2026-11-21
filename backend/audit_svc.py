@@ -47,6 +47,9 @@ def dashboard(authorization: AuthHeader = None):
             "SELECT COUNT(*) c FROM hold_staging WHERE status='暂存'"
         ).fetchone()["c"]
         mats = conn.execute("SELECT COUNT(*) c FROM materializations").fetchone()["c"]
+        failure_tickets = conn.execute(
+            "SELECT COUNT(*) c FROM failure_tickets"
+        ).fetchone()["c"]
         contention = conn.execute("SELECT COUNT(*) c FROM contention_log").fetchone()["c"]
         return {
             "open_windows": open_n,
@@ -55,5 +58,6 @@ def dashboard(authorization: AuthHeader = None):
             "rejects": reject_n,
             "holds": hold_n,
             "materializations": mats,
+            "failure_tickets": failure_tickets,
             "contention": contention,
         }

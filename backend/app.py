@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from audit_svc import router as audit_router
 from auth import router as auth_router
+from clearing_card import router as clearing_card_router
 from db import FRONTEND, PRODUCT_META, init_db
 from hold_svc import router as hold_router
 from ingest_svc import router as ingest_router
@@ -41,6 +42,7 @@ for r in (
     audit_router,
     hold_router,
     reopen_router,
+    clearing_card_router,
 ):
     app.include_router(r)
 
